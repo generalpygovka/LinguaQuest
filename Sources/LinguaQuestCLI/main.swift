@@ -4,7 +4,8 @@ print("Добрий день! Тут ми будемо вивчати англі
 let question = Question(
     word: "apple",
     options: ["яблуко", "вікно", "книга"],
-    correctAnswerIndex: 0
+    correctAnswerIndex: 0,
+    hint: "Це фрукт."
 )
 
 print()
@@ -12,4 +13,8 @@ print("Як перекладається слово «\(question.word)»?")
 
 for index in question.options.indices {
     print("\(index + 1). \(question.options[index])")
+}
+
+if let hint = question.hint {
+    print("Підказка: \(hint)")
 }
