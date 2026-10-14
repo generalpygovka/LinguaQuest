@@ -13,7 +13,7 @@ struct Lesson {
 
     static func beginner() -> Lesson {
         return Lesson(
-            title: "Перші англійські слова",
+            title: "Перші кроки англійською",
             questions: [
                 Question(
                     word: "apple",
