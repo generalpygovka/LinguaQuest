@@ -1,17 +1,17 @@
-struct Lesson {
-    let title: String
-    let questions: [Question]
+public struct Lesson {
+    public let title: String
+    public let questions: [Question]
 
-    init(title: String, questions: [Question]) {
+    public init(title: String, questions: [Question]) {
         self.title = title
         self.questions = questions
     }
 
-    var questionCount: Int {
+    public var questionCount: Int {
         return questions.count
     }
 
-    static func beginner() -> Lesson {
+    public static func beginner() -> Lesson {
         return Lesson(
             title: "Перші кроки англійською",
             questions: [

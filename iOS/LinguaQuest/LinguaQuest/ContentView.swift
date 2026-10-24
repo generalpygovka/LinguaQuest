@@ -1,4 +1,5 @@
 import SwiftUI
+import LinguaQuestCore
 
 struct ContentView: View {
     private let lesson = Lesson.beginner()
