@@ -15,7 +15,7 @@ struct LinguaQuestApp: App {
                 lesson: lesson,
                 checker: checker,
                 points: { isCorrect in
-                    return isCorrect ? 1 : -1
+                    return isCorrect ? 1 : 0
                 }
             )
 

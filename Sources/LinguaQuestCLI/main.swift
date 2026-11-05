@@ -17,7 +17,7 @@ func runLesson(
     print("Введіть номер відповіді й натисніть Enter.")
     print("Щоб отримати підказку, введіть ?")
     print("Правильна відповідь: +1 бал.")
-    print("Невиконане запитання: -1 бал.")
+    print("Невиконане запитання: 0 балів.")
 
     guard !lesson.questions.isEmpty else {
         print("У цьому уроці поки немає запитань.")
@@ -89,13 +89,13 @@ func runLesson(
                 if wrongAttempts == 1 {
                     print("Неправильно. Маєш ще одну спробу (напиши ? для підказки).")
                 } else {
-                    score -= 1
+                    
                     questionFinished = true
 
                     let correctAnswer =
                         question.options[question.correctAnswerIndex]
 
-                    print("Неправильно вдруге. -1 бал.")
+                    print("Цього разу неправильно.")
                     print(
                         "Правильна відповідь: \(correctAnswer)."
                     )

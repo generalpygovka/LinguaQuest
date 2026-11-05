@@ -55,7 +55,7 @@ final class LessonViewModel: ObservableObject {
                     question.options[question.correctAnswerIndex]
 
                 message =
-                    "Неправильно. \(pointsText(scoreChange))\n" +
+                    "Цього разу неправильно.\n" +
                     "Правильна відповідь: \(correctAnswer)."
             } else {
                 message =
