@@ -1,23 +1,11 @@
 import SwiftUI
 
+@MainActor
 struct ContentView: View {
-    private let lesson = Lesson.beginner()
-    private let checker: any AnswerChecking = AnswerChecker()
+    @StateObject private var viewModel: LessonViewModel
 
-    @State private var questionIndex = 0
-    @State private var correctAnswers = 0
-    @State private var score = 0
-    @State private var wrongAttempts = 0
-    @State private var questionFinished = false
-    @State private var hintVisible = false
-    @State private var message = ""
-
-    private var currentQuestion: Question? {
-        guard lesson.questions.indices.contains(questionIndex) else {
-            return nil
-        }
-
-        return lesson.questions[questionIndex]
+    init(viewModel: LessonViewModel) {
+        _viewModel = StateObject(wrappedValue: viewModel)
     }
 
     var body: some View {
@@ -27,18 +15,18 @@ struct ContentView: View {
                     .font(.largeTitle)
                     .bold()
 
-                Text(lesson.title)
+                Text(viewModel.lessonTitle)
                     .font(.title2)
 
-                Text("Бали: \(score)")
+                Text("Бали: \(viewModel.score)")
                     .font(.headline)
 
-                if lesson.questions.isEmpty {
-                    Text("У цьому уроці поки немає запитань.")
-                } else if let question = currentQuestion {
+                if viewModel.isCompleted {
+                    resultsView
+                } else if let question = viewModel.currentQuestion {
                     questionView(for: question)
                 } else {
-                    resultsView
+                    Text("Не вдалося отримати запитання.")
                 }
             }
             .padding()
@@ -48,8 +36,8 @@ struct ContentView: View {
     private func questionView(for question: Question) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(
-                "Запитання \(questionIndex + 1) " +
-                "із \(lesson.questionCount)"
+                "Запитання \(viewModel.questionNumber) " +
+                "із \(viewModel.questionCount)"
             )
             .foregroundStyle(.secondary)
 
@@ -62,43 +50,34 @@ struct ContentView: View {
 
             ForEach(question.options.indices, id: \.self) { index in
                 Button {
-                    checkAnswer(index, for: question)
+                    viewModel.submitAnswer(at: index)
                 } label: {
                     Text(question.options[index])
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 6)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(questionFinished)
+                .disabled(viewModel.questionFinished)
             }
 
             Button("Підказка") {
-                hintVisible = true
+                viewModel.showHint()
             }
             .buttonStyle(.bordered)
-            .disabled(questionFinished)
+            .disabled(viewModel.questionFinished)
 
-            if hintVisible {
-                if let hint = question.hint {
-                    Text("Підказка: \(hint)")
-                } else {
-                    Text("Для цього запитання підказки немає.")
-                }
+            if let hintText = viewModel.hintText {
+                Text(hintText)
             }
 
-            if !message.isEmpty {
-                Text(message)
+            if !viewModel.message.isEmpty {
+                Text(viewModel.message)
                     .font(.headline)
             }
 
-            if questionFinished {
-                Button(
-                    questionIndex + 1 == lesson.questionCount
-                    ? "Завершити урок"
-                    : "Наступне запитання"
-                ) {
-                    questionIndex += 1
-                    resetQuestion()
+            if viewModel.questionFinished {
+                Button(viewModel.nextButtonTitle) {
+                    viewModel.nextQuestion()
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -113,73 +92,19 @@ struct ContentView: View {
 
             Text(
                 "Правильно виконано запитань: " +
-                "\(correctAnswers) із \(lesson.questionCount)."
+                "\(viewModel.correctAnswers) " +
+                "із \(viewModel.questionCount)."
             )
 
             Text(
-                "Бали: \(score). " +
-                "Максимум: \(lesson.questionCount)."
+                "Бали: \(viewModel.score). " +
+                "Максимум: \(viewModel.questionCount)."
             )
 
             Button("Пройти ще раз") {
-                questionIndex = 0
-                correctAnswers = 0
-                score = 0
-                resetQuestion()
+                viewModel.restart()
             }
             .buttonStyle(.borderedProminent)
         }
-    }
-
-    private func checkAnswer(
-        _ answerIndex: Int,
-        for question: Question
-    ) {
-        guard !questionFinished else {
-            return
-        }
-
-        let result = checker.check(
-            answerIndex: answerIndex,
-            question: question
-        )
-
-        switch result {
-        case .correct:
-            correctAnswers += 1
-            score += 1
-            questionFinished = true
-
-            message = "Правильно! +1 бал."
-
-        case .incorrect:
-            wrongAttempts += 1
-
-            if wrongAttempts == 1 {
-                message =
-                    "Неправильно. Спробуй ще раз " +
-                    "або скористайся підказкою."
-            } else {
-                score -= 1
-                questionFinished = true
-
-                let correctAnswer =
-                    question.options[question.correctAnswerIndex]
-
-                message =
-                    "Неправильно. −1 бал.\n" +
-                    "Правильна відповідь: \(correctAnswer)."
-            }
-
-        case .invalid:
-            message = "Помилка: некоректні дані запитання."
-        }
-    }
-
-    private func resetQuestion() {
-        wrongAttempts = 0
-        questionFinished = false
-        hintVisible = false
-        message = ""
     }
 }
