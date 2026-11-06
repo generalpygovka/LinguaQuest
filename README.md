@@ -36,7 +36,8 @@
 - LessonSession керує спробами, балами та проходженням.
 - LinguaQuestApp створює компоненти й передає залежності.
 
-Пояснення та схема: [docs/architecture.md](docs/architecture.md).
+Архітектура, Observer, SOLID та аналіз антипатернів:
+[docs/architecture.md](docs/architecture.md).
 
 ## Реалізовані конструкції Swift
 
@@ -94,7 +95,9 @@ Xcode: 16.2. Мінімальна версія iOS: 18.2.
 Моделі й перевірка відповідей розташовані в
 `Sources/LinguaQuestCLI`, iOS-код — у `iOS/LinguaQuest/LinguaQuest`.
 
-Спільна бібліотека, репозиторій уроків і патерни — наступні етапи.
+Observer використовується через Combine і SwiftUI.
+Спільна бібліотека, репозиторій уроків, Builder і Decorator —
+наступні етапи.
 
 ## Внесок учасників
 
