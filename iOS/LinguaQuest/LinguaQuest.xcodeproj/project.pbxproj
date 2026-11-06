@@ -12,11 +12,22 @@
 		DD6D6E333083DC0C004AB529 /* AnswerChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6D6E323083DC0C004AB529 /* AnswerChecker.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		DDE8E7C4309E6CFE00070D0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DD4E804D3083C22B0013EF60 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DD4E80543083C22B0013EF60;
+			remoteInfo = LinguaQuest;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		DD4E80553083C22C0013EF60 /* LinguaQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinguaQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD6D6E2E3083DBE6004AB529 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ../../Sources/LinguaQuestCLI/Question.swift; sourceTree = SOURCE_ROOT; };
 		DD6D6E303083DBFD004AB529 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Lesson.swift; path = ../../Sources/LinguaQuestCLI/Lesson.swift; sourceTree = SOURCE_ROOT; };
 		DD6D6E323083DC0C004AB529 /* AnswerChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerChecker.swift; path = ../../Sources/LinguaQuestCLI/AnswerChecker.swift; sourceTree = SOURCE_ROOT; };
+		DDE8E7C0309E6CFE00070D0F /* LinguaQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinguaQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -25,10 +36,22 @@
 			path = LinguaQuest;
 			sourceTree = "<group>";
 		};
+		DDE8E7C1309E6CFE00070D0F /* LinguaQuestTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LinguaQuestTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DD4E80523083C22B0013EF60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE8E7BD309E6CFE00070D0F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +68,7 @@
 				DD6D6E303083DBFD004AB529 /* Lesson.swift */,
 				DD6D6E2E3083DBE6004AB529 /* Question.swift */,
 				DD4E80573083C22C0013EF60 /* LinguaQuest */,
+				DDE8E7C1309E6CFE00070D0F /* LinguaQuestTests */,
 				DD4E80563083C22C0013EF60 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				DD4E80553083C22C0013EF60 /* LinguaQuest.app */,
+				DDE8E7C0309E6CFE00070D0F /* LinguaQuestTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +107,29 @@
 			productReference = DD4E80553083C22C0013EF60 /* LinguaQuest.app */;
 			productType = "com.apple.product-type.application";
 		};
+		DDE8E7BF309E6CFE00070D0F /* LinguaQuestTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDE8E7C8309E6CFE00070D0F /* Build configuration list for PBXNativeTarget "LinguaQuestTests" */;
+			buildPhases = (
+				DDE8E7BC309E6CFE00070D0F /* Sources */,
+				DDE8E7BD309E6CFE00070D0F /* Frameworks */,
+				DDE8E7BE309E6CFE00070D0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DDE8E7C5309E6CFE00070D0F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DDE8E7C1309E6CFE00070D0F /* LinguaQuestTests */,
+			);
+			name = LinguaQuestTests;
+			packageProductDependencies = (
+			);
+			productName = LinguaQuestTests;
+			productReference = DDE8E7C0309E6CFE00070D0F /* LinguaQuestTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -94,6 +142,10 @@
 				TargetAttributes = {
 					DD4E80543083C22B0013EF60 = {
 						CreatedOnToolsVersion = 16.2;
+					};
+					DDE8E7BF309E6CFE00070D0F = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = DD4E80543083C22B0013EF60;
 					};
 				};
 			};
@@ -112,12 +164,20 @@
 			projectRoot = "";
 			targets = (
 				DD4E80543083C22B0013EF60 /* LinguaQuest */,
+				DDE8E7BF309E6CFE00070D0F /* LinguaQuestTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DD4E80533083C22B0013EF60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDE8E7BE309E6CFE00070D0F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +197,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DDE8E7BC309E6CFE00070D0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DDE8E7C5309E6CFE00070D0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DD4E80543083C22B0013EF60 /* LinguaQuest */;
+			targetProxy = DDE8E7C4309E6CFE00070D0F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DD4E80613083C2310013EF60 /* Debug */ = {
@@ -315,6 +390,40 @@
 			};
 			name = Release;
 		};
+		DDE8E7C6309E6CFE00070D0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.generalpygovka.LinguaQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinguaQuest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LinguaQuest";
+			};
+			name = Debug;
+		};
+		DDE8E7C7309E6CFE00070D0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.generalpygovka.LinguaQuestTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LinguaQuest.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LinguaQuest";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -332,6 +441,15 @@
 			buildConfigurations = (
 				DD4E80643083C2310013EF60 /* Debug */,
 				DD4E80653083C2310013EF60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDE8E7C8309E6CFE00070D0F /* Build configuration list for PBXNativeTarget "LinguaQuestTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDE8E7C6309E6CFE00070D0F /* Debug */,
+				DDE8E7C7309E6CFE00070D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
