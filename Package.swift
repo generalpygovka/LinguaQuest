@@ -21,6 +21,11 @@ let package = Package(
         .executableTarget(
             name: "LinguaQuestCLI",
             dependencies: ["LinguaQuestCore"]
+        ),
+        .testTarget(
+            name: "LinguaQuestCoreTests",
+            dependencies: ["LinguaQuestCore"]
+        
         )
     ]
 )

@@ -129,8 +129,7 @@ do {
     let lesson = try repository.loadLesson()
     let checker: any AnswerChecking = LoggingAnswerChecker(
     wrapping: AnswerChecker(),
-    log: { message in
-        print("[Перевірка] \(message)")
+    log: { message in print("[Перевірка] \(message)")
     }
 )
     runLesson(lesson, checker: checker)
