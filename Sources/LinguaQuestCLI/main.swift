@@ -123,7 +123,13 @@ func runLesson(
     )
 }
 
-let lesson = Lesson.beginner()
-let checker: any AnswerChecking = AnswerChecker()
+let repository: any LessonRepository = InMemoryLessonRepository()
 
-runLesson(lesson, checker: checker)
+do {
+    let lesson = try repository.loadLesson()
+    let checker: any AnswerChecking = AnswerChecker()
+
+    runLesson(lesson, checker: checker)
+} catch {
+    print("Не вдалося підготувати урок: \(error)")
+}
