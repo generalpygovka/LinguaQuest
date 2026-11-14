@@ -1,3 +1,5 @@
+import LinguaQuestCore
+
 func showHint(for question: Question) {
     if let hint = question.hint {
         print("Підказка: \(hint)")

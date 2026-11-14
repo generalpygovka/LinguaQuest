@@ -1,23 +1,27 @@
-enum AnswerResult {
+public enum AnswerResult: Equatable {
     case correct
     case incorrect
     case invalid
 }
 
-protocol AnswerChecking {
+public protocol AnswerChecking {
     func check(
         answerIndex: Int,
         question: Question
     ) -> AnswerResult
 }
 
-class AnswerChecker: AnswerChecking {
-    func check(
+public class AnswerChecker: AnswerChecking {
+    public init() {}
+
+    public func check(
         answerIndex: Int,
         question: Question
     ) -> AnswerResult {
         guard question.options.indices.contains(answerIndex),
-              question.options.indices.contains(question.correctAnswerIndex)
+              question.options.indices.contains(
+                  question.correctAnswerIndex
+              )
         else {
             return .invalid
         }
