@@ -127,8 +127,12 @@ let repository: any LessonRepository = InMemoryLessonRepository()
 
 do {
     let lesson = try repository.loadLesson()
-    let checker: any AnswerChecking = AnswerChecker()
-
+    let checker: any AnswerChecking = LoggingAnswerChecker(
+    wrapping: AnswerChecker(),
+    log: { message in
+        print("[Перевірка] \(message)")
+    }
+)
     runLesson(lesson, checker: checker)
 } catch {
     print("Не вдалося підготувати урок: \(error)")
