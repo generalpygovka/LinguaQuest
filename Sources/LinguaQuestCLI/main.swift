@@ -8,33 +8,22 @@ func showHint(for question: Question) {
     }
 }
 
-func runLesson(
-    _ lesson: Lesson,
-    checker: any AnswerChecking
-) {
-    var correctAnswers = 0
-    var score = 0
-
-    print("LinguaQuest — \(lesson.title)")
+func runLesson(_ session: LessonSession) {
+    print("LinguaQuest — \(session.lesson.title)")
     print("Введіть номер відповіді й натисніть Enter.")
     print("Щоб отримати підказку, введіть ?")
     print("Правильна відповідь: +1 бал.")
     print("Невиконане запитання: 0 балів.")
 
-    guard !lesson.questions.isEmpty else {
-        print("У цьому уроці поки немає запитань.")
-        return
-    }
-
-    for (questionIndex, question) in lesson.questions.enumerated() {
-        guard !question.options.isEmpty else {
-            print("Помилка: у запитанні немає варіантів відповіді.")
+    while !session.isCompleted {
+        guard let question = session.currentQuestion else {
+            print("Не вдалося отримати поточне запитання.")
             return
         }
 
         print()
         print(
-            "Питання \(questionIndex + 1): " +
+            "Питання \(session.questionIndex + 1): " +
             "як перекладається «\(question.word)»?"
         )
 
@@ -45,10 +34,7 @@ func runLesson(
             )
         }
 
-        var wrongAttempts = 0
-        var questionFinished = false
-
-        while !questionFinished {
+        while !session.questionFinished {
             print("Ваша відповідь: ", terminator: "")
 
             guard let input = readLine() else {
@@ -66,34 +52,27 @@ func runLesson(
                   answerNumber >= 1,
                   answerNumber <= question.options.count
             else {
-                print("Введіть число від 1 " + "до \(question.options.count) " + "або ? для підказки.")
+                print(
+                    "Введіть число від 1 " +
+                    "до \(question.options.count) " +
+                    "або ? для підказки."
+                )
                 continue
             }
 
             let answerIndex = answerNumber - 1
 
-            let result = checker.check(
-                answerIndex: answerIndex,
-                question: question
-            )
+            guard let result = session.submitAnswer(answerIndex) else {
+                print("Не вдалося прийняти відповідь.")
+                return
+            }
 
             switch result {
             case .correct:
-                correctAnswers += 1
-                score += 1
-                questionFinished = true
-
                 print("Правильно! +1 бал.")
 
             case .incorrect:
-                wrongAttempts += 1
-
-                if wrongAttempts == 1 {
-                    print("Неправильно. Маєш ще одну спробу (напиши ? для підказки).")
-                } else {
-                    
-                    questionFinished = true
-
+                if session.questionFinished {
                     let correctAnswer =
                         question.options[question.correctAnswerIndex]
 
@@ -101,25 +80,37 @@ func runLesson(
                     print(
                         "Правильна відповідь: \(correctAnswer)."
                     )
+                } else {
+                    print(
+                        "Неправильно. Спробуй ще раз " +
+                        "або введи ? для підказки."
+                    )
                 }
 
             case .invalid:
-                print("Помилка: некоректні дані запитання.")
+                print("Помилка: не вдалося перевірити відповідь.")
                 return
             }
         }
 
-        print("Поточні бали: \(score).")
+        print("Поточні бали: \(session.score).")
+
+        guard session.nextQuestion() else {
+            print("Не вдалося перейти до наступного запитання.")
+            return
+        }
     }
 
     print()
     print("Урок завершено!")
     print(
         "Правильно виконано запитань: " +
-        "\(correctAnswers) із \(lesson.questionCount)."
+        "\(session.correctAnswers) із " +
+        "\(session.lesson.questionCount)."
     )
     print(
-        "Бали: \(score). Максимум: \(lesson.questionCount)."
+        "Бали: \(session.score). " +
+        "Максимум: \(session.lesson.questionCount)."
     )
 }
 
@@ -127,12 +118,23 @@ let repository: any LessonRepository = InMemoryLessonRepository()
 
 do {
     let lesson = try repository.loadLesson()
+
     let checker: any AnswerChecking = LoggingAnswerChecker(
-    wrapping: AnswerChecker(),
-    log: { message in print("[Перевірка] \(message)")
-    }
-)
-    runLesson(lesson, checker: checker)
+        wrapping: AnswerChecker(),
+        log: { message in
+            print("[Перевірка] \(message)")
+        }
+    )
+
+    let session = try LessonSession(
+        lesson: lesson,
+        checker: checker,
+        points: { isCorrect in
+            return isCorrect ? 1 : 0
+        }
+    )
+
+    runLesson(session)
 } catch {
     print("Не вдалося підготувати урок: \(error)")
 }
