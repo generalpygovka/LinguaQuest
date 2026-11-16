@@ -1,23 +1,21 @@
-import LinguaQuestCore
-
-enum LessonSessionError: Error {
+public enum LessonSessionError: Error {
     case emptyLesson
     case invalidQuestion(index: Int)
 }
 
-final class LessonSession {
-    let lesson: Lesson
+public final class LessonSession {
+    public let lesson: Lesson
 
     private let checker: any AnswerChecking
     private let points: (Bool) -> Int
 
-    private(set) var questionIndex = 0
-    private(set) var correctAnswers = 0
-    private(set) var score = 0
-    private(set) var wrongAttempts = 0
-    private(set) var questionFinished = false
+    public private(set) var questionIndex = 0
+    public private(set) var correctAnswers = 0
+    public private(set) var score = 0
+    public private(set) var wrongAttempts = 0
+    public private(set) var questionFinished = false
 
-    var currentQuestion: Question? {
+    public var currentQuestion: Question? {
         guard lesson.questions.indices.contains(questionIndex) else {
             return nil
         }
@@ -25,11 +23,11 @@ final class LessonSession {
         return lesson.questions[questionIndex]
     }
 
-    var isCompleted: Bool {
+    public var isCompleted: Bool {
         return questionIndex >= lesson.questionCount
     }
 
-    init(
+    public init(
         lesson: Lesson,
         checker: any AnswerChecking,
         points: @escaping (Bool) -> Int
@@ -54,7 +52,7 @@ final class LessonSession {
     }
 
     @discardableResult
-    func submitAnswer(_ answerIndex: Int) -> AnswerResult? {
+    public func submitAnswer(_ answerIndex: Int) -> AnswerResult? {
         guard !isCompleted,
               !questionFinished,
               let question = currentQuestion
@@ -89,7 +87,7 @@ final class LessonSession {
     }
 
     @discardableResult
-    func nextQuestion() -> Bool {
+    public func nextQuestion() -> Bool {
         guard questionFinished, !isCompleted else {
             return false
         }
@@ -100,7 +98,7 @@ final class LessonSession {
         return true
     }
 
-    func restart() {
+    public func restart() {
         questionIndex = 0
         correctAnswers = 0
         score = 0
