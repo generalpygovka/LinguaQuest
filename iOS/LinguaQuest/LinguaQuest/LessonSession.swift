@@ -1,3 +1,5 @@
+import LinguaQuestCore
+
 enum LessonSessionError: Error {
     case emptyLesson
     case invalidQuestion(index: Int)

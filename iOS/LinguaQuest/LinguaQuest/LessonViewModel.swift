@@ -1,4 +1,5 @@
 import Combine
+import LinguaQuestCore
 
 @MainActor
 final class LessonViewModel: ObservableObject {

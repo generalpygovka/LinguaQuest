@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD6D6E2F3083DBE6004AB529 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6D6E2E3083DBE6004AB529 /* Question.swift */; };
-		DD6D6E313083DBFE004AB529 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6D6E303083DBFD004AB529 /* Lesson.swift */; };
-		DD6D6E333083DC0C004AB529 /* AnswerChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6D6E323083DC0C004AB529 /* AnswerChecker.swift */; };
+		DD1ABA6330ABB7680065AF14 /* LinguaQuestCore in Frameworks */ = {isa = PBXBuildFile; productRef = DD1ABA6230ABB7680065AF14 /* LinguaQuestCore */; };
+		DD1ABA6630ABB8370065AF14 /* LinguaQuestCore in Frameworks */ = {isa = PBXBuildFile; productRef = DD1ABA6530ABB8370065AF14 /* LinguaQuestCore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,9 +23,6 @@
 
 /* Begin PBXFileReference section */
 		DD4E80553083C22C0013EF60 /* LinguaQuest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LinguaQuest.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD6D6E2E3083DBE6004AB529 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Question.swift; path = ../../Sources/LinguaQuestCLI/Question.swift; sourceTree = SOURCE_ROOT; };
-		DD6D6E303083DBFD004AB529 /* Lesson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Lesson.swift; path = ../../Sources/LinguaQuestCLI/Lesson.swift; sourceTree = SOURCE_ROOT; };
-		DD6D6E323083DC0C004AB529 /* AnswerChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AnswerChecker.swift; path = ../../Sources/LinguaQuestCLI/AnswerChecker.swift; sourceTree = SOURCE_ROOT; };
 		DDE8E7C0309E6CFE00070D0F /* LinguaQuestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LinguaQuestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -48,6 +44,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1ABA6330ABB7680065AF14 /* LinguaQuestCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,20 +52,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD1ABA6630ABB8370065AF14 /* LinguaQuestCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DD1ABA6430ABB8370065AF14 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		DD4E804C3083C22B0013EF60 = {
 			isa = PBXGroup;
 			children = (
-				DD6D6E323083DC0C004AB529 /* AnswerChecker.swift */,
-				DD6D6E303083DBFD004AB529 /* Lesson.swift */,
-				DD6D6E2E3083DBE6004AB529 /* Question.swift */,
 				DD4E80573083C22C0013EF60 /* LinguaQuest */,
 				DDE8E7C1309E6CFE00070D0F /* LinguaQuestTests */,
+				DD1ABA6430ABB8370065AF14 /* Frameworks */,
 				DD4E80563083C22C0013EF60 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,6 +105,7 @@
 			);
 			name = LinguaQuest;
 			packageProductDependencies = (
+				DD1ABA6230ABB7680065AF14 /* LinguaQuestCore */,
 			);
 			productName = LinguaQuest;
 			productReference = DD4E80553083C22C0013EF60 /* LinguaQuest.app */;
@@ -125,6 +129,7 @@
 			);
 			name = LinguaQuestTests;
 			packageProductDependencies = (
+				DD1ABA6530ABB8370065AF14 /* LinguaQuestCore */,
 			);
 			productName = LinguaQuestTests;
 			productReference = DDE8E7C0309E6CFE00070D0F /* LinguaQuestTests.xctest */;
@@ -158,6 +163,9 @@
 			);
 			mainGroup = DD4E804C3083C22B0013EF60;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				DD1ABA6130ABB7680065AF14 /* XCLocalSwiftPackageReference "../../../LinguaQuest" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DD4E80563083C22C0013EF60 /* Products */;
 			projectDirPath = "";
@@ -191,9 +199,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD6D6E2F3083DBE6004AB529 /* Question.swift in Sources */,
-				DD6D6E333083DC0C004AB529 /* AnswerChecker.swift in Sources */,
-				DD6D6E313083DBFE004AB529 /* Lesson.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,6 +460,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		DD1ABA6130ABB7680065AF14 /* XCLocalSwiftPackageReference "../../../LinguaQuest" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../../LinguaQuest;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DD1ABA6230ABB7680065AF14 /* LinguaQuestCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = LinguaQuestCore;
+		};
+		DD1ABA6530ABB8370065AF14 /* LinguaQuestCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DD1ABA6130ABB7680065AF14 /* XCLocalSwiftPackageReference "../../../LinguaQuest" */;
+			productName = LinguaQuestCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DD4E804D3083C22B0013EF60 /* Project object */;
 }

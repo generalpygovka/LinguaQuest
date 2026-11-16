@@ -1,4 +1,5 @@
 import SwiftUI
+import LinguaQuestCore
 
 @MainActor
 struct ContentView: View {

@@ -1,5 +1,6 @@
 import XCTest
 import Combine
+import LinguaQuestCore
 @testable import LinguaQuest
 
 final class LinguaQuestTests: XCTestCase {
