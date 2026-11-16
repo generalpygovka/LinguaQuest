@@ -9,8 +9,17 @@ struct LinguaQuestApp: App {
 
     init() {
         do {
-            let lesson = Lesson.beginner()
-            let checker: any AnswerChecking = AnswerChecker()
+            let repository: any LessonRepository =
+                InMemoryLessonRepository()
+
+            let lesson = try repository.loadLesson()
+
+            let checker: any AnswerChecking = LoggingAnswerChecker(
+                wrapping: AnswerChecker(),
+                log: { message in
+                    print("[Перевірка] \(message)")
+                }
+            )
 
             let session = try LessonSession(
                 lesson: lesson,
@@ -49,19 +58,32 @@ struct LinguaQuestApp: App {
     }
 
     private static func errorMessage(for error: Error) -> String {
-        guard let sessionError = error as? LessonSessionError else {
-            return "Сталася помилка підготовки уроку."
+        if let builderError = error as? LessonBuilderError {
+            switch builderError {
+            case .emptyTitle:
+                return "Урок не має назви."
+
+            case .emptyLesson:
+                return "У цьому уроці поки немає запитань."
+
+            case .invalidQuestion(let index):
+                return "Запитання \(index + 1) містить некоректні дані."
+            }
         }
 
-        switch sessionError {
-        case .emptyLesson:
-            return "У цьому уроці поки немає запитань."
+        if let sessionError = error as? LessonSessionError {
+            switch sessionError {
+            case .emptyLesson:
+                return "У цьому уроці поки немає запитань."
 
-        case .invalidQuestion(let index):
-            return (
-                "Запитання \(index + 1) містить " +
-                "некоректні варіанти відповіді."
-            )
+            case .invalidQuestion(let index):
+                return (
+                    "Запитання \(index + 1) містить " +
+                    "некоректні варіанти відповіді."
+                )
+            }
         }
+
+        return "Сталася помилка підготовки уроку."
     }
 }
