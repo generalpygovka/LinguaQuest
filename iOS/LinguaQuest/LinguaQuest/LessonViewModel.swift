@@ -3,7 +3,6 @@ import LinguaQuestCore
 
 @MainActor
 final class LessonViewModel: ObservableObject {
-    let lessonTitle: String
     let questionCount: Int
 
     @Published private(set) var currentQuestion: Question? = nil
@@ -14,6 +13,7 @@ final class LessonViewModel: ObservableObject {
     @Published private(set) var isCompleted = false
     @Published private(set) var hintText: String? = nil
     @Published private(set) var message = ""
+    @Published private(set) var lessonTitle: String
 
     private let session: LessonSession
 
@@ -30,7 +30,15 @@ final class LessonViewModel: ObservableObject {
 
         synchronize()
     }
+    
+    func updateLessonTitle(_ title: String) {
+        guard lessonTitle != title else {
+            return
+        }
 
+        lessonTitle = title
+    }
+    
     func submitAnswer(at answerIndex: Int) {
         guard let question = session.currentQuestion else {
             return
