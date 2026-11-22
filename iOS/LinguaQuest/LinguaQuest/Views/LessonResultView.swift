@@ -8,6 +8,7 @@ struct LessonResultView: View {
     let score: Int
 
     let onRestart: () -> Void
+    let onReturnToCatalog: () -> Void
 
     var body: some View {
         ScrollView {
@@ -34,8 +35,16 @@ struct LessonResultView: View {
                     onRestart()
                 }
                 .buttonStyle(.borderedProminent)
+
+                Button("До уроків") {
+                    onReturnToCatalog()
+                }
+                .buttonStyle(.bordered)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(
+                maxWidth: .infinity,
+                alignment: .leading
+            )
             .padding()
         }
     }

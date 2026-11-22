@@ -5,6 +5,8 @@ import LinguaQuestCore
 struct LessonPlayView: View {
     @ObservedObject var viewModel: LessonViewModel
 
+    let onCompleted: () -> Void
+
     @Environment(\.accessibilityReduceMotion)
     private var reduceMotion
 
@@ -23,16 +25,23 @@ struct LessonPlayView: View {
 
                 if let question = viewModel.currentQuestion {
                     questionView(for: question)
+                } else if viewModel.isCompleted {
+                    Text("Урок завершено.")
                 } else {
                     Text("Не вдалося отримати запитання.")
                 }
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(
+                maxWidth: .infinity,
+                alignment: .leading
+            )
             .padding()
         }
     }
 
-    private func questionView(for question: Question) -> some View {
+    private func questionView(
+        for question: Question
+    ) -> some View {
         VStack(alignment: .leading, spacing: 16) {
             Text(
                 "Запитання \(viewModel.questionNumber) " +
@@ -47,7 +56,10 @@ struct LessonPlayView: View {
                 .font(.largeTitle)
                 .bold()
 
-            ForEach(question.options.indices, id: \.self) { index in
+            ForEach(
+                question.options.indices,
+                id: \.self
+            ) { index in
                 Button {
                     viewModel.submitAnswer(at: index)
                 } label: {
@@ -61,7 +73,9 @@ struct LessonPlayView: View {
 
             Button("Підказка") {
                 withAnimation(
-                    reduceMotion ? nil : .easeInOut(duration: 0.25)
+                    reduceMotion
+                        ? nil
+                        : .easeInOut(duration: 0.25)
                 ) {
                     viewModel.showHint()
                 }
@@ -71,11 +85,16 @@ struct LessonPlayView: View {
 
             if let hintText = viewModel.hintText {
                 Text(hintText)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .frame(
+                        maxWidth: .infinity,
+                        alignment: .leading
+                    )
                     .padding()
                     .background(
                         Color.blue.opacity(0.08),
-                        in: RoundedRectangle(cornerRadius: 12)
+                        in: RoundedRectangle(
+                            cornerRadius: 12
+                        )
                     )
                     .transition(
                         .opacity.combined(
@@ -92,6 +111,10 @@ struct LessonPlayView: View {
             if viewModel.questionFinished {
                 Button(viewModel.nextButtonTitle) {
                     viewModel.nextQuestion()
+
+                    if viewModel.isCompleted {
+                        onCompleted()
+                    }
                 }
                 .buttonStyle(.borderedProminent)
             }
