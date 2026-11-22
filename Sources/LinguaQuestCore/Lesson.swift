@@ -1,8 +1,16 @@
-public struct Lesson {
+import Foundation
+
+public struct Lesson: Identifiable {
+    public let id: UUID
     public let title: String
     public let questions: [Question]
 
-    public init(title: String, questions: [Question]) {
+    public init(
+        id: UUID = UUID(),
+        title: String,
+        questions: [Question]
+    ) {
+        self.id = id
         self.title = title
         self.questions = questions
     }
