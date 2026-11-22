@@ -7,7 +7,7 @@ iOS використовує MVVM. Екрани відображають ста�
 керує правилами проходження.
 
 Навігацію відокремлено в AppRouter. ContentView зв’язує
-екрани, Router, каталог і хранилище прохождений.
+екрани, Router, каталог і сховище проходжень.
 Правила спроб та балів залишаються в LessonSession.
 
 Спільна бібліотека LinguaQuestCore не залежить від SwiftUI
@@ -45,7 +45,7 @@ flowchart TD
 ```
 
 LinguaQuestApp створює репозиторій каталогу, ViewModel,
-перевіряльник і фабрику прохождений для LessonProgressStore.
+перевіряльник і фабрику LessonViewModel для LessonProgressStore.
 
 CLI отримує початковий урок через InMemoryLessonRepository.
 Обидві версії використовують LoggingAnswerChecker,
