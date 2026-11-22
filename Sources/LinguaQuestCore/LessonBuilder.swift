@@ -1,3 +1,5 @@
+import Foundation
+
 public enum LessonBuilderError: Error {
     case emptyTitle
     case emptyLesson
@@ -5,10 +7,15 @@ public enum LessonBuilderError: Error {
 }
 
 public final class LessonBuilder {
+    private let id: UUID
     private let title: String
     private var questions: [Question] = []
 
-    public init(title: String) {
+    public init(
+        id: UUID = UUID(),
+        title: String
+    ) {
+        self.id = id
         self.title = title
     }
 
@@ -37,7 +44,11 @@ public final class LessonBuilder {
             }
         }
 
-        return Lesson(title: title, questions: questions)
+        return Lesson(
+            id: id,
+            title: title,
+            questions: questions
+        )
     }
 
     private func isBlank(_ text: String) -> Bool {

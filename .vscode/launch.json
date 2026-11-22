@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LinguaQuest}",
+            "name": "Debug LinguaQuestCLI",
+            "target": "LinguaQuestCLI",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug LinguaQuestCLI"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:LinguaQuest}",
+            "name": "Release LinguaQuestCLI",
+            "target": "LinguaQuestCLI",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release LinguaQuestCLI"
+        }
+    ]
+}
